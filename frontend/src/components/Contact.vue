@@ -20,7 +20,7 @@ Kirim Email
 300">LinkedIn</a>
 
 </div>
-<p class="text-gray-500">&copy; {{ new Date().getFullYear() }} Nama Mahasiswa. Dibuat dengan
+<p class="text-gray-500">&copy; {{ new Date().getFullYear() }} Hafidz. Dibuat dengan Vue dan Laravel.
 </p>
 </div>
 </footer>
