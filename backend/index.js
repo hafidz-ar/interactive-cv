@@ -15,5 +15,3 @@ app.get('/api/projects', (req, res) => res.json(projects));
 app.listen(PORT, () => {
 console.log(` Server backend berjalan di http://localhost:${PORT}`);
 });
-
-module.exports = app;
