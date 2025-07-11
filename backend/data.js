@@ -11,7 +11,7 @@ const skills = [
 ];
 
 const projects = [ 
-    { title: 'Website Topupin', image: '../frontend/src/assets/foto/Topupinn.png',
+    { title: 'Website Topupin', image: '/frontend/src/assets/foto/Topupin.webp',
 description: 'Platform Top-up game online.', tech: ['Tailwind', 'Laravel',
 'MySql'], link: '#' }
 ];
