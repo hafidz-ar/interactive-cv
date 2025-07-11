@@ -11,11 +11,9 @@ const skills = [
 ];
 
 const projects = [ 
-    { title: 'Website Toko Online', image: 'https://via.placeholder.com/500x300?text=Proyek+1',
-description: 'Platform e-commerce dengan fitur keranjang belanja.', tech: ['Vue.js', 'Express.js',
-'PostgreSQL'], link: '#' },
-    { title: 'Aplikasi Manajemen Tugas', image: 'https://via.placeholder.com/500x300?text=Proyek+2',
-description: 'Aplikasi untuk melacak progres tugas harian.', tech: ['React', 'Firebase'], link: '#' }
+    { title: 'Website Topupin', image: '/assets/foto/Topupinn.png',
+description: 'Platform Top-up game online.', tech: ['Tailwind', 'Laravel',
+'MySql'], link: '#' }
 ];
 
 module.exports = { educationHistory, skills, projects };
