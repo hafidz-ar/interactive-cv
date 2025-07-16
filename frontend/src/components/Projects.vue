@@ -1,8 +1,10 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 // Script setup tetap sama persis dengan PDF
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import SectionTitle from './SectionTitle.vue';
+
 const projects = ref([]);
 onMounted(async () => {
   try {
@@ -10,7 +12,7 @@ onMounted(async () => {
     projects.value = response.data;
   } catch (error) { console.error(error); }
 });
-</script>
+</script>~
 
 <template>
   <section id="proyek" class="py-20 bg-gray-800">

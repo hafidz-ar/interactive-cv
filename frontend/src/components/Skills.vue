@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 // Script setup tetap sama persis dengan PDF
 import { ref, onMounted } from 'vue';

@@ -2,7 +2,7 @@
   <section id="profil" class="container mx-auto px-6 py-24 flex flex-col md:flex-row items-center">
     <div class="md:w-1/2 text-center md:text-left">
       <p class="text-xl text-gray-400 mb-2 animate-slide-in-left" style="animation-delay: 200ms;">
-        Hello I'm
+        Halooo Saya
       </p>
       <h1 class="text-6xl font-bold text-white mb-2 animate-slide-in-left" style="animation-delay: 400ms;">
         Hafidz Ar Rofi
