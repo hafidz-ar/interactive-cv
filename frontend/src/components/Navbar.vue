@@ -1,77 +1,77 @@
 <script setup>
 import { ref } from 'vue';
 
-// State untuk mengontrol visibilitas menu mobile
 const isMenuOpen = ref(false);
 
-// Data untuk link navigasi (lebih mudah dikelola)
 const navLinks = ref([
   { name: 'HOME', href: '#profil' },
-  { name: 'EDUCATION', href: '#pendidikan' },
-  { name: 'SKILL', href: '#skill' },
-  { name: 'PROJECT', href: '#proyek' },
+  { name: 'CERTIFICATE', href: '#certificates' },
+  { name: 'SKILLS', href: '#skills' },
+  { name: 'PROJECTS', href: '#projects' },
+  { name: 'EDUCATION', href: '#education' },
   { name: 'CONTACT', href: '#kontak' }
 ]);
 
-// Fungsi untuk membuka/menutup menu
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
+  // Mencegah scroll saat menu terbuka
+  document.body.style.overflow = isMenuOpen.value ? 'hidden' : 'auto';
 };
 
-// Fungsi untuk menutup menu (dipanggil saat link di klik)
 const closeMenu = () => {
   isMenuOpen.value = false;
+  document.body.style.overflow = 'auto';
 };
 </script>
 
-<style scoped>
-/* Transisi untuk menu mobile */
-.slide-down-enter-active,
-.slide-down-leave-active {
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
-
-.slide-down-enter-from,
-.slide-down-leave-to {
-  transform: translateY(-20%);
-  opacity: 0;
-}
-</style>
-
 <template>
-  <header class="bg-gray-900/80 backdrop-blur-sm shadow-md sticky top-0 z-50">
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="#" class="text-xl sm:text-2xl font-bold text-white">Hafidz Ar Rofi</a>
+  <header class="bg-white/90 backdrop-blur-lg border-b border-gray-100 sticky top-0 z-50">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center relative z-50">
+      <a href="#" class="text-xl font-black tracking-tight text-gray-900 z-50 relative">
+        Hafidz<span class="text-indigo-600">.AI</span>
+      </a>
 
-      <ul class="hidden md:flex space-x-6 items-center">
+      <ul class="hidden md:flex space-x-8 items-center">
         <li v-for="link in navLinks" :key="link.name">
-          <a :href="link.href" class="text-gray-300 hover:text-yellow-400 transition-colors duration-300 font-medium">
+          <a :href="link.href" class="text-sm font-bold text-gray-500 hover:text-indigo-600 transition-colors tracking-wide">
             {{ link.name }}
           </a>
         </li>
       </ul>
 
-      <div class="md:hidden">
-        <button @click="toggleMenu" aria-label="Buka menu">
-          <svg v-if="!isMenuOpen" class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-          </svg>
-          <svg v-else class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
+      <button @click="toggleMenu" class="md:hidden text-gray-900 focus:outline-none z-50 relative p-2">
+        <div class="w-6 h-5 relative flex flex-col justify-between">
+          <span :class="{'rotate-45 translate-y-2': isMenuOpen}" class="w-full h-0.5 bg-current transition-transform duration-300 transform origin-center"></span>
+          <span :class="{'opacity-0': isMenuOpen}" class="w-full h-0.5 bg-current transition-opacity duration-300"></span>
+          <span :class="{'-rotate-45 -translate-y-2': isMenuOpen}" class="w-full h-0.5 bg-current transition-transform duration-300 transform origin-center"></span>
+        </div>
+      </button>
     </nav>
 
-    <transition name="slide-down">
-      <div v-if="isMenuOpen" class="md:hidden bg-gray-900 absolute w-full top-full left-0 shadow-lg">
-        <ul class="flex flex-col items-center py-4">
-          <li v-for="link in navLinks" :key="link.name" class="w-full text-center">
-            <a :href="link.href" @click="closeMenu" class="block py-3 text-gray-300 hover:bg-gray-800 hover:text-yellow-400 transition-colors duration-300">
+    <transition
+      enter-active-class="transition duration-300 ease-out"
+      enter-from-class="opacity-0 -translate-y-4"
+      enter-to-class="opacity-100 translate-y-0"
+      leave-active-class="transition duration-200 ease-in"
+      leave-from-class="opacity-100 translate-y-0"
+      leave-to-class="opacity-0 -translate-y-4"
+    >
+      <div v-if="isMenuOpen" class="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center md:hidden pt-16">
+        <ul class="space-y-6 text-center">
+          <li v-for="link in navLinks" :key="link.name">
+            <a
+              :href="link.href"
+              @click="closeMenu"
+              class="text-2xl font-bold text-gray-900 hover:text-indigo-600 transition-colors"
+            >
               {{ link.name }}
             </a>
           </li>
         </ul>
+
+        <div class="mt-12 text-sm text-gray-400">
+          Based in Yogyakarta
+        </div>
       </div>
     </transition>
   </header>

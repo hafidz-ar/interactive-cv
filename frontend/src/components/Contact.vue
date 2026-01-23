@@ -16,34 +16,49 @@ const socialLinks = ref([
 </script>
 
 <template>
-  <footer id="kontak" class="bg-gray-900 py-16 sm:py-20 text-white">
-    <div class="container mx-auto px-6 text-center">
+  <footer id="kontak" class="bg-neutral-950 text-white border-t border-white/10">
+    <div class="container mx-auto px-6 py-16">
 
-      <h2 class="text-3xl sm:text-4xl font-bold mb-3">Hubungi Saya</h2>
-      <p class="max-w-2xl mx-auto text-base sm:text-lg text-gray-400 mb-8">
-        Saya selalu terbuka untuk diskusi, kolaborasi, atau sekadar menyapa. Jangan ragu untuk terhubung!
-      </p>
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-16">
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
+            Interested in collaboration?
+          </h2>
+          <p class="text-neutral-400 text-lg leading-relaxed">
+            I'm always open to discussing new AI research, freelance opportunities, or innovative ideas.
+          </p>
+        </div>
 
-      <a href="mailto:hafidzar93@gmail.com" class="inline-block bg-yellow-400 text-gray-900 font-bold py-3 px-6 sm:py-4 sm:px-8 rounded-lg hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105 mb-10 sm:mb-12">
-        Kirim Email
-      </a>
-
-      <div class="flex justify-center space-x-5 sm:space-x-6 mb-8">
-        <a v-for="link in socialLinks"
-           :key="link.name"
-           :href="link.href"
-           target="_blank"
-           rel="noopener noreferrer"
-           :aria-label="`Kunjungi profil ${link.name} saya`"
-           class="text-gray-400 hover:text-white transform hover:scale-110 transition-all duration-300">
-
-          <svg class="w-7 h-7 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24" v-html="link.iconPath"></svg>
+        <a href="mailto:hafidzar93@gmail.com"
+           class="inline-flex items-center justify-center h-12 px-8 font-medium text-neutral-950 bg-white rounded-md hover:bg-neutral-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-neutral-950 whitespace-nowrap">
+           Get in Touch
+           <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+           </svg>
         </a>
       </div>
 
-      <p class="text-gray-500 text-xs sm:text-sm">
-        &copy; {{ new Date().getFullYear() }} Hafidz Ar Rofi. Dibuat dengan ❤️ di Yogyakarta.
-      </p>
+      <div class="w-full h-px bg-white/10 mb-8"></div>
+
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="text-neutral-500 text-sm font-medium">
+          &copy; {{ new Date().getFullYear() }} Hafidz Ar Rofi.
+          <span class="hidden sm:inline"> | </span>
+          <span class="block sm:inline mt-1 sm:mt-0">AI Engineer based in Yogyakarta.</span>
+        </div>
+
+        <div class="flex items-center space-x-6">
+          <a v-for="link in socialLinks"
+             :key="link.name"
+             :href="link.href"
+             target="_blank"
+             rel="noopener noreferrer"
+             :aria-label="link.name"
+             class="text-neutral-400 hover:text-white transition-colors duration-200">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" v-html="link.iconPath"></svg>
+          </a>
+        </div>
+      </div>
     </div>
   </footer>
 </template>
