@@ -14,62 +14,74 @@ const navLinks = ref([
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
-  // Mencegah scroll saat menu terbuka
-  document.body.style.overflow = isMenuOpen.value ? 'hidden' : 'auto';
 };
 
 const closeMenu = () => {
   isMenuOpen.value = false;
-  document.body.style.overflow = 'auto';
 };
 </script>
 
 <template>
-  <header class="bg-white/90 backdrop-blur-lg border-b border-gray-100 sticky top-0 z-50">
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center relative z-50">
-      <a href="#" class="text-xl font-black tracking-tight text-gray-900 z-50 relative">
+  <header class="bg-white/80 backdrop-blur-xl border-b border-gray-100 sticky top-0 z-50 transition-all duration-300">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center relative z-50">
+      <!-- Logo -->
+      <a href="#" class="text-2xl font-black tracking-tighter text-gray-900 flex items-center gap-1 hover:opacity-80 transition-opacity">
         Hafidz<span class="text-indigo-600">.AI</span>
       </a>
 
-      <ul class="hidden md:flex space-x-8 items-center">
+      <!-- Desktop Menu -->
+      <ul class="hidden lg:flex items-center space-x-8">
         <li v-for="link in navLinks" :key="link.name">
-          <a :href="link.href" class="text-sm font-bold text-gray-500 hover:text-indigo-600 transition-colors tracking-wide">
+          <a 
+            :href="link.href" 
+            class="text-sm font-semibold text-gray-600 hover:text-indigo-600 transition-all duration-300 tracking-wide relative group py-2"
+          >
             {{ link.name }}
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full rounded-full"></span>
           </a>
         </li>
       </ul>
 
-      <button @click="toggleMenu" class="md:hidden text-gray-900 focus:outline-none z-50 relative p-2">
-        <div class="w-6 h-5 relative flex flex-col justify-between">
-          <span :class="{'rotate-45 translate-y-2': isMenuOpen}" class="w-full h-0.5 bg-current transition-transform duration-300 transform origin-center"></span>
-          <span :class="{'opacity-0': isMenuOpen}" class="w-full h-0.5 bg-current transition-opacity duration-300"></span>
-          <span :class="{'-rotate-45 -translate-y-2': isMenuOpen}" class="w-full h-0.5 bg-current transition-transform duration-300 transform origin-center"></span>
-        </div>
-      </button>
+      <!-- Mobile Menu Button -->
+      <div class="flex items-center lg:hidden">
+        <button 
+          @click="toggleMenu" 
+          class="text-gray-900 focus:outline-none p-2 rounded-lg hover:bg-gray-100/50 transition-colors"
+          aria-label="Toggle Menu"
+        >
+          <div class="w-6 h-5 relative flex flex-col justify-between">
+            <span :class="{'rotate-45 translate-y-[9px]': isMenuOpen}" class="w-full h-0.5 bg-current transition-all duration-300 transform origin-center rounded-full"></span>
+            <span :class="{'opacity-0': isMenuOpen}" class="w-full h-0.5 bg-current transition-opacity duration-300 rounded-full"></span>
+            <span :class="{'-rotate-45 -translate-y-[9px]': isMenuOpen}" class="w-full h-0.5 bg-current transition-all duration-300 transform origin-center rounded-full"></span>
+          </div>
+        </button>
+      </div>
     </nav>
 
+    <!-- Mobile Menu Dropdown -->
     <transition
-      enter-active-class="transition duration-300 ease-out"
-      enter-from-class="opacity-0 -translate-y-4"
-      enter-to-class="opacity-100 translate-y-0"
-      leave-active-class="transition duration-200 ease-in"
-      leave-from-class="opacity-100 translate-y-0"
-      leave-to-class="opacity-0 -translate-y-4"
+      enter-active-class="transition-all duration-300 ease-out"
+      enter-from-class="opacity-0 max-h-0 translate-y-[-10px]"
+      enter-to-class="opacity-100 max-h-[500px] translate-y-0"
+      leave-active-class="transition-all duration-200 ease-in"
+      leave-from-class="opacity-100 max-h-[500px] translate-y-0"
+      leave-to-class="opacity-0 max-h-0 translate-y-[-10px]"
     >
-      <div v-if="isMenuOpen" class="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center md:hidden pt-16">
-        <ul class="space-y-6 text-center">
-          <li v-for="link in navLinks" :key="link.name">
+      <div v-if="isMenuOpen" class="lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 absolute w-full shadow-lg overflow-hidden">
+        <ul class="flex flex-col px-4 sm:px-6 py-4 space-y-2">
+          <li v-for="(link, index) in navLinks" :key="link.name" 
+              class="transform transition-all duration-300"
+              :style="{ transitionDelay: isMenuOpen ? `${index * 50}ms` : '0ms' }">
             <a
               :href="link.href"
               @click="closeMenu"
-              class="text-2xl font-bold text-gray-900 hover:text-indigo-600 transition-colors"
+              class="flex items-center w-full px-4 py-3 text-sm font-bold text-gray-700 hover:text-indigo-600 hover:bg-indigo-50/50 rounded-xl transition-all duration-300 tracking-wide"
             >
               {{ link.name }}
             </a>
           </li>
         </ul>
-
-        <div class="mt-12 text-sm text-gray-400">
+        <div class="px-8 pb-6 pt-2 text-xs text-gray-500 font-medium text-center mt-2">
           Based in Yogyakarta
         </div>
       </div>
